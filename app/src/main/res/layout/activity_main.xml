@@ -8,7 +8,6 @@
     android:background="@color/grey"
     tools:context=".MainActivity">
 
-
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
@@ -23,25 +22,23 @@
             android:background="@color/light_blue">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_app_bar"
-                    style="@style/AppBarText"
+                    android:textColor="@color/white"
+                    style="@style/HeaderText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="To Do List"
+                    android:text="@string/to_do_list"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
         </Toolbar>
-
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -61,11 +58,18 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="76dp"
         android:background="@color/white"
+        app:itemActiveIndicatorStyle="@android:color/transparent"
+        app:itemBackground="@android:color/transparent"
+        app:itemHorizontalTranslationEnabled="false"
+        app:itemIconTint="@color/bottom_nav_menu_selector"
+        app:labelVisibilityMode="unlabeled"
+        app:itemIconSize="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="70dp"
@@ -96,6 +100,7 @@
                 app:strokeWidth="3dp">
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab_add_todo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:backgroundTint="@color/light_blue"
