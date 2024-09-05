@@ -1,8 +1,11 @@
 package com.training.todoapp.database.entity
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
+
 
 @Entity(tableName = "todos")
 data class Todo(
@@ -16,5 +19,5 @@ data class Todo(
     @ColumnInfo
     val date: Long,
     @ColumnInfo
-    val isDone: Boolean,
-)
+    val isDone: Boolean = false,
+):Serializable

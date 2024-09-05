@@ -54,7 +54,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="select time"
+        android:text="Select Date"
+        android:fontFamily="@font/roboto_medium"
         android:textColor="@color/black"
         android:textSize="18sp" />
 

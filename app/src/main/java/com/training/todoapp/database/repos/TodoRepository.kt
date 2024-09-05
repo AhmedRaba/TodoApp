@@ -7,7 +7,7 @@ import com.training.todoapp.database.entity.Todo
 class TodoRepository(private val todoDao: TodoDao) {
 
 
-    val readAllData:LiveData<List<Todo>> = todoDao.getTodos()
+    val readAllData: LiveData<List<Todo>> = todoDao.getTodos()
 
 
     suspend fun addTodo(todo: Todo) {
@@ -20,6 +20,16 @@ class TodoRepository(private val todoDao: TodoDao) {
 
     suspend fun deleteTodo(todo: Todo) {
         todoDao.deleteTodo(todo)
+    }
+
+
+    suspend fun markTodoAsDone(todo: Todo) {
+        val updatedTodo = todo.copy(isDone = true)
+        todoDao.updateTodo(updatedTodo)
+    }
+
+    fun getTodosByDate(date: Long): List<Todo> {
+        return todoDao.getTodosByDate(date)
     }
 
 

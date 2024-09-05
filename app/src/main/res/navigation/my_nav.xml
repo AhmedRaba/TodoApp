@@ -6,12 +6,31 @@
     app:startDestination="@id/listFragment">
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.training.todoapp.ListFragment"
+        android:name="com.training.todoapp.frags.ListFragment"
         android:label="fragment_list"
-        tools:layout="@layout/fragment_list" />
+        tools:layout="@layout/fragment_list" >
+        <action
+            android:id="@+id/action_listFragment_to_taskDetailsFragment"
+            app:destination="@id/taskDetailsFragment" />
+        <argument
+            android:name="todo"
+            app:argType="com.training.todoapp.database.entity.Todo" />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.training.todoapp.SettingsFragment"
+        android:name="com.training.todoapp.frags.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/taskDetailsFragment"
+        android:name="com.training.todoapp.frags.TaskDetailsFragment"
+        android:label="fragment_task_details"
+        tools:layout="@layout/fragment_task_details" >
+        <action
+            android:id="@+id/action_taskDetailsFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+        <argument
+            android:name="todo"
+            app:argType="com.training.todoapp.database.entity.Todo" />
+    </fragment>
 </navigation>

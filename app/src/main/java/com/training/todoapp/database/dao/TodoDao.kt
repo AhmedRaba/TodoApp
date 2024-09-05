@@ -22,4 +22,9 @@ interface TodoDao {
     @Query("SELECT * FROM todos ORDER BY id DESC")
     fun getTodos():LiveData<List<Todo>>
 
+
+    @Query("SELECT * FROM todos WHERE date = :date")
+    fun getTodosByDate(date:Long):List<Todo>
+
+
 }
