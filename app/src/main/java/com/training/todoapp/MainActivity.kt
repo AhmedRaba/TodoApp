@@ -8,6 +8,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.training.todoapp.databinding.ActivityMainBinding
 import com.training.todoapp.frags.AddTodoBottomSheet
+import com.training.todoapp.frags.ListFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,8 +26,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupFab() {
+        val bottomSheet = AddTodoBottomSheet()
         binding.fabAddTodo.setOnClickListener {
-            AddTodoBottomSheet().show(supportFragmentManager, null)
+            bottomSheet.show(supportFragmentManager, null)
+            bottomSheet.setOnDismissListener {
+                val navHostFragment =
+                    supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as? NavHostFragment
+                val listFragment = navHostFragment?.childFragmentManager?.fragments?.firstOrNull { it is ListFragment } as? ListFragment
+                listFragment?.refreshTodos()
+            }
         }
     }
 

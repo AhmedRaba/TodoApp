@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.training.todoapp.TodosAdapter
@@ -18,7 +18,7 @@ import com.training.todoapp.databinding.FragmentListBinding
 class ListFragment : Fragment() {
 
     private lateinit var binding: FragmentListBinding
-    private val viewModel by viewModels<TodoViewModel>()
+    private val viewModel by activityViewModels<TodoViewModel>()
     private lateinit var adapter: TodosAdapter
     private var selectedDay = CalendarDay.today()
 
@@ -40,7 +40,13 @@ class ListFragment : Fragment() {
 
     }
 
-    private fun initCalendarListener() {
+    override fun onResume() {
+        super.onResume()
+        Log.e("onResume", "onResume")
+    }
+
+
+    fun initCalendarListener() {
         binding.calendarView.currentDate = CalendarDay.today()
         binding.calendarView.selectedDate = CalendarDay.today()
         binding.calendarView.setOnDateChangedListener { widget, date, selected ->
@@ -81,14 +87,14 @@ class ListFragment : Fragment() {
             }
 
             override fun onItemClick(todo: Todo) {
-                val action= ListFragmentDirections.actionListFragmentToTaskDetailsFragment(todo)
+                val action = ListFragmentDirections.actionListFragmentToTaskDetailsFragment(todo)
                 findNavController().navigate(action)
             }
         }
         binding.rvTodo.adapter = adapter
     }
 
-    private fun observeTodosByDate() {
+     fun observeTodosByDate() {
         refreshTodos()
         viewModel.todosForSelectedDate.observe(viewLifecycleOwner) {
             Log.e("observeTodosByDate", "observeTodosByDate: $it")

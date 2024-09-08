@@ -1,11 +1,13 @@
 package com.training.todoapp.frags
 
 import android.app.DatePickerDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.training.todoapp.database.entity.Todo
@@ -17,7 +19,8 @@ class AddTodoBottomSheet : BottomSheetDialogFragment() {
 
     private lateinit var binding: BottomSheetAddTodoBinding
     private var calendar = Calendar.getInstance()
-    private val viewModel: TodoViewModel by viewModels()
+    private val viewModel: TodoViewModel by activityViewModels()
+    private var onDismissListener: (() -> Unit)? = null
 
 
     override fun onCreateView(
@@ -119,5 +122,13 @@ class AddTodoBottomSheet : BottomSheetDialogFragment() {
         binding.tvTodoDate.text = "$day/${month + 1}/$year"
     }
 
+    fun setOnDismissListener(listener: () -> Unit) {
+        onDismissListener = listener
+    }
 
+
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        onDismissListener?.invoke()
+    }
 }
