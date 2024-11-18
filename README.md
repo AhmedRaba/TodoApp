@@ -1,4 +1,4 @@
-# 📝 To-Do List Android App
+# 📝 To-Do List
 
 A simple and intuitive To-Do List app that allows users to manage tasks efficiently. Users can add tasks based on selected dates, update tasks, and delete them as needed. Designed with a focus on clean architecture and modern Android development practices.
 
