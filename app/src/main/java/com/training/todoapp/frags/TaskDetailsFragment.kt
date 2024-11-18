@@ -1,5 +1,6 @@
 package com.training.todoapp.frags
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.util.Log
@@ -33,9 +34,6 @@ class TaskDetailsFragment : Fragment() {
         binding = FragmentTaskDetailsBinding.inflate(inflater, container, false)
 
 
-
-
-
         return binding.root
     }
 
@@ -49,6 +47,7 @@ class TaskDetailsFragment : Fragment() {
         setupDate()
         initDatePicker()
         updateTodo()
+        deleteTodo()
 
 
     }
@@ -100,6 +99,24 @@ class TaskDetailsFragment : Fragment() {
         }
 
     }
+
+    private fun deleteTodo() {
+        binding.btnDeleteEdit.setOnClickListener {
+            AlertDialog.Builder(requireContext())
+                .setTitle("Delete Todo")
+                .setMessage("Are you sure you want to delete this todo?")
+                .setPositiveButton("Yes") { _, _ ->
+                    viewModel.deleteTodo(args.todo)
+                    findNavController().navigateUp()
+                }
+                .setNegativeButton("No") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .create()
+                .show()
+        }
+    }
+
 
     private fun updateDateTv() {
         binding.tvTaskDate.text =
